@@ -1,5 +1,6 @@
 # Loo Parser (Ruby Gem)
 
+[![Gem Version](https://badge.fury.io/rb/loo_parser.svg)](https://badge.fury.io/rb/loo_parser)
 [![Test & Lint](https://github.com/BrownOps/loo_parser.rb/actions/workflows/test.yml/badge.svg)](https://github.com/BrownOps/loo_parser.rb/actions/workflows/test.yml)
 
 A Ruby tool for parsing WhatsApp chat exports to track and analyze bathroom usage patterns through specific emoji-based messages.
