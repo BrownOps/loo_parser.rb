@@ -1,0 +1,14 @@
+CommandContext:
+  bundle_exec: true
+
+PreCommit:
+  RuboCop:
+    enabled: true
+    command: [ 'bundle', 'exec', 'rubocop' ]
+
+  BundleCheck:
+    enabled: true # Check if Gemfile.lock is up-to-date
+
+  Brakeman:
+    enabled: true
+    command: [ 'bundle', 'exec', 'brakeman', '-A', '--force' ] # -A scans current dir, --force ignores missing Rails structure

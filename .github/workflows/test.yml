@@ -1,0 +1,33 @@
+name: Test & Lint Ruby Gem
+
+on:
+  push:
+    branches: [main] # Or your default branch
+  pull_request:
+    branches: [main] # Or your default branch
+
+jobs:
+  test_and_lint:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # Test against relevant Ruby versions
+        ruby-version: ["3.2", "3.3", "3.4"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Ruby ${{ matrix.ruby-version }}
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby-version }}
+          bundler-cache: true # Runs bundle install and caches dependencies
+
+      - name: Run RSpec tests
+        run: bundle exec rake spec
+
+      - name: Run RuboCop linter
+        run: bundle exec rake rubocop
+
+      - name: Run Brakeman security scanner
+        run: bundle exec brakeman -A --force --no-pager # -A scans current dir, --force ignores missing Rails
