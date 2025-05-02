@@ -1,37 +1,11 @@
-name: Test & Lint
+name: Release Gem
 
 on:
   push:
-    branches:
-      - "**"
-  pull_request:
-    branches: [main]
+    tags: ["v*"]
 
 jobs:
-  test_and_lint:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        ruby-version: ["3.2", "3.3", "3.4"]
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Set up Ruby ${{ matrix.ruby-version }}
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: ${{ matrix.ruby-version }}
-          bundler-cache: true
-
-      - name: Run RSpec tests
-        run: bundle exec rake spec
-
-      - name: Run RuboCop linter
-        run: bundle exec rake rubocop
-
   release:
-    needs: test_and_lint
-    if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
 
     steps:
